@@ -1,0 +1,40 @@
+# Copyright 2026 The v8-dash developers
+# SPDX-License-Identifier: MIT
+
+# shepherd configuration. Copy to ~/.config/shepherd/config.toml (or point
+# SHEPHERD_CONFIG at it). Relative paths are resolved against this file's
+# directory. Every key is optional except [gerrit] owner.
+
+[gerrit]
+host = "https://chromium-review.googlesource.com"
+project = "v8/v8"
+# The account whose open CLs are tracked.
+owner = "you@example.com"
+# CLs owned by others to track as well.
+extra_cls = []
+# Credentials for draft comments: "auto" tries git-credential-luci, then the
+# git cookie file (`git config http.cookiefile`, default ~/.gitcookies).
+auth = "auto"
+
+[paths]
+# Watcher state, log, dashboard data. Default ~/.local/state/shepherd.
+state_dir = "~/.local/state/shepherd"
+# Override where the watcher files or the dashboard files live, eg to keep
+# using an existing setup. Both default to state_dir.
+# watch_dir = ""
+# data_dir = ""
+# Project-specific rules for the agent; see prompt/project.example.md.
+# project_file = ""
+
+[dash]
+# The dashboard has no authentication; keep it on a loopback address.
+host = "127.0.0.1"
+port = 8787
+
+[watch]
+# Seconds between Gerrit polls.
+interval = 300
+# Seconds `shepherd wait` waits without anything to report before exit 124.
+max_wait = 14400
+# Desktop notification per eventful poll of `shepherd watch`.
+notify = true
